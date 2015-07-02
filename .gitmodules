@@ -1,0 +1,3 @@
+[submodule "pebblejs"]
+	path = pebblejs
+	url = git@github.com:HAZARDU5/pebblejs.git
