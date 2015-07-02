@@ -1,0 +1,49 @@
+{
+    "uuid": "9955461d-70bb-441c-ab82-39212269e0be",
+    "shortName": "Pip-Boy",
+    "longName": "Pip-Boy 200",
+    "companyName": "UXVirtual",
+    "versionCode": 1,
+    "versionLabel": "0.1",
+    "capabilities": [
+        "configurable"
+    ],
+    "watchapp": {
+        "watchface": false
+    },
+    "appKeys": {},
+    "resources": {
+        "media": [
+            {
+                "menuIcon": true,
+                "type": "png",
+                "name": "IMAGE_MENU_ICON",
+                "file": "images/custom/menu_icon.png"
+            },
+            {
+                "type": "png",
+                "name": "IMAGE_LOGO_SPLASH",
+                "file": "images/custom/logo_splash.png"
+            },
+            {
+                "type": "png",
+                "name": "IMAGE_TILE_SPLASH",
+                "file": "images/custom/tile_splash.png"
+            },
+            {
+                "type": "font",
+                "name": "MONO_FONT_14",
+                "file": "fonts/custom/UbuntuMono-Regular.ttf"
+            },
+            {
+                "type": "png",
+                "name": "IMAGE_VAULTBOY_OK",
+                "file": "images/custom/vaultboy-ok.png"
+            }
+        ]
+    },
+    "targetPlatforms": [
+        "basalt"
+    ],
+    "sdkVersion": "3"
+}
