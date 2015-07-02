@@ -11,41 +11,39 @@ var Vector2 = require('vector2');
 
 
 // Set a configurable with the open callback
-function setConfig(){
-    Settings.config(
-        {
-            url: 'http://hazard.local/pebblejs-master/config?maxdr='+Settings.option('maxdr'),
-            autoSave: true
-        },
-        function(e) {
-            console.log('opening configurable');
+Settings.config(
+    {
+        url: 'http://hazard.local/pebblejs-master/config?maxdr='+Settings.option('maxdr'),
+        autoSave: true
+    },
+    function(e) {
+        console.log('opening configurable');
 
-            console.log(JSON.stringify(e.options));
+        console.log(JSON.stringify(e.options));
 
-            // Reset color to red before opening the webview
-            //Settings.option('color', 'red');
-        },
-        function(e) {
-            console.log('closed configurable');
+        // Reset color to red before opening the webview
+        //Settings.option('color', 'red');
+    },
+    function(e) {
+        console.log('closed configurable');
 
-            // Show the parsed response
-            console.log(JSON.stringify(e.options));
+        // Show the parsed response
+        console.log(JSON.stringify(e.options));
 
-            if(e.options.length > 0){
-                Settings.option(e.options);
-            }
-
-
-
-            // Show the raw response if parsing failed
-            if (e.failed) {
-                console.log(e.response);
-            }
-
-            //setConfig();
+        if(e.options.length > 0){
+            Settings.option(e.options);
         }
-    );
-}
+
+
+
+        // Show the raw response if parsing failed
+        if (e.failed) {
+            console.log(e.response);
+        }
+
+        //setConfig();
+    }
+);
 
 var dr = Settings.option('maxdr');
 
@@ -59,7 +57,7 @@ var main = new UI.Window({ fullscreen: true });
 var image = new UI.Image({
     position: new Vector2(0, 0),
     size: new Vector2(144, 168),
-    image: 'images/vaultboy-ok.png'
+    image: 'images/custom/vaultboy-ok.png'
 });
 
 main.add(image);

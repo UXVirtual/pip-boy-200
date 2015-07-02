@@ -18,22 +18,22 @@
                 "menuIcon": true,
                 "type": "png",
                 "name": "IMAGE_MENU_ICON",
-                "file": "images/custom/menu_icon.png"
+                "file": "images/menu_icon.png"
             },
             {
                 "type": "png",
                 "name": "IMAGE_LOGO_SPLASH",
-                "file": "images/custom/logo_splash.png"
+                "file": "images/logo_splash.png"
             },
             {
                 "type": "png",
                 "name": "IMAGE_TILE_SPLASH",
-                "file": "images/custom/tile_splash.png"
+                "file": "images/tile_splash.png"
             },
             {
                 "type": "font",
                 "name": "MONO_FONT_14",
-                "file": "fonts/custom/UbuntuMono-Regular.ttf"
+                "file": "fonts/UbuntuMono-Regular.ttf"
             },
             {
                 "type": "png",
