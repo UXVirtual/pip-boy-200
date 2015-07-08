@@ -37,8 +37,13 @@
             },
             {
                 "type": "png",
-                "name": "IMAGE_VAULTBOY_OK",
-                "file": "images/custom/vaultboy-ok.png"
+                "name": "IMAGE_CND_BG",
+                "file": "images/custom/cnd-bg.png"
+            },
+            {
+                "type": "png",
+                "name": "IMAGE_RAD_BG",
+                "file": "images/custom/rad-bg.png"
             }
         ]
     },
