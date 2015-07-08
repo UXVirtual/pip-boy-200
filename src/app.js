@@ -59,9 +59,17 @@ Settings.config(
 
 var dr = Settings.option('maxdr');
 var currentWindow = 0; //the currently displayed window
+var currentWindowName = 'cnd';
 var menuItems = [];
+var windowNames = {};
+var windowCallbacks = {};
+var menuNames = {};
 var windows = [];
+var menus = [];
 var defaultWindow = 0;
+var defaultWindowName = 'cnd';
+
+var self = this;
 
 if(typeof dr === 'undefined'){
     dr = '-';
@@ -77,7 +85,7 @@ if(typeof dr === 'undefined'){
 
 /*
 
-    CND Screen
+    Windows
 
  */
 
@@ -154,9 +162,29 @@ function addRADWindow(){
 
 /*
 
-    RAD Screen
+    Menus
 
- */
+*/
+
+function addCRIPMenu(){
+    var menu = new UI.Menu({
+        sections: [{
+            items: [{
+                title: 'Pebble.js',
+                icon: 'images/menu_icon.png',
+                subtitle: 'Can do Menus'
+            }, {
+                title: 'Second Item',
+                subtitle: 'Subtitle Text'
+            }]
+        }]
+    });
+    menu.on('select', function(e) {
+        console.log('Selected item #' + e.itemIndex + ' of section #' + e.sectionIndex);
+        console.log('The item is titled "' + e.item.title + '"');
+    });
+    return menu;
+}
 
 /*main.on('click', 'up', function(e) {
   var menu = new UI.Menu({
@@ -207,10 +235,6 @@ main.on('click', 'down', function(e) {
 
 */
 
-function hideCurrentWindow(){
-    currentWindow.hide();
-}
-
 function addMenuItems(window,currentItem){
 
     if(typeof menuItems[window] === 'undefined'){
@@ -230,8 +254,6 @@ function addMenuItems(window,currentItem){
 
         console.log('Pressed up button');
 
-        //removeMenuItems(menuItems[window]);
-
         if(currentWindow-1 < 0){
             windows[windows.length-1];
             currentWindow = windows.length-1;
@@ -240,25 +262,11 @@ function addMenuItems(window,currentItem){
             currentWindow--;
         }
 
+        currentWindowName = getWindowName(currentWindow);
+
         windows[currentWindow].show();
 
-        /*var menu = new UI.Menu({
-            sections: [{
-                items: [{
-                    title: 'Pebble.js',
-                    icon: 'images/menu_icon.png',
-                    subtitle: 'Can do Menus'
-                }, {
-                    title: 'Second Item',
-                    subtitle: 'Subtitle Text'
-                }]
-            }]
-        });
-        menu.on('select', function(e) {
-            console.log('Selected item #' + e.itemIndex + ' of section #' + e.sectionIndex);
-            console.log('The item is titled "' + e.item.title + '"');
-        });
-        menu.show();*/
+
     });
 
     //enter current window menu
@@ -266,37 +274,37 @@ function addMenuItems(window,currentItem){
 
         console.log('Pressed select button');
 
-        var wind = new UI.Window({
-            fullscreen: true,
-        });
-        var textfield = new UI.Text({
-            position: new Vector2(0, 65),
-            size: new Vector2(144, 30),
-            font: 'gothic-24-bold',
-            text: 'Text Anywhere!',
-            textAlign: 'center'
-        });
-        wind.add(textfield);
-        wind.show();
+        windowCallbacks[getWindowName(currentWindow)].call();
     });
 
     //select next menu item
     window.on('click', 'down', function(e) {
 
-        console.log('Pressed down button');
+        if(currentWindow+1 === windows.length){
+            windows[0];
+            currentWindow = 0;
+        }else{
+            windows[currentWindow+1];
+            currentWindow++;
+        }
 
-        /*var card = new UI.Card();
-        card.title('A Card');
-        card.subtitle('Is a Window');
-        card.body('The simplest window type in Pebble.js.');
-        card.show();*/
+        windows[currentWindow].show();
     });
 }
 
-function removeMenuItems(menuItems){
+function getWindowName(windowIndex){
+    for(var propt in windowNames){
+        if(windowNames[propt] === windowIndex){
+            return propt;
+        }
+    }
+}
 
-    for(var i = 0; i < menuItems.length; i++){
-        window.remove(menuItems[i]);
+function getMenuName(menuIndex){
+    for(var propt in menuNames){
+        if(menuNames[propt] === menuIndex){
+            return propt;
+        }
     }
 }
 
@@ -357,6 +365,19 @@ function addMenuItem(window,name,label,x,y,width,height,selected){
 
 
 windows.push(addCNDWindow());
-windows.push(addRADWindow());
+windowNames.cnd = 0;
+windowCallbacks.cnd = function(){
+    menus[menuNames.crip].show();
+}
 
-windows[0].show();
+windows.push(addRADWindow());
+windowNames.rad = 1;
+windowCallbacks.rad = function(){
+
+}
+
+menus.push(addCRIPMenu());
+menuNames.crip = 0;
+
+windows[defaultWindow].show();
+//windowCallbacks[defaultWindowName].call();
